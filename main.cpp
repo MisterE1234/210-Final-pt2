@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <deque>
+#include <vector>
 
 using namespace std;
 
@@ -23,9 +24,14 @@ int main (){
     string custDrinks[20] = {"Latte", "Cappuccino", "Espresso", "Mocha", "Americano", "Macchiato", "Flat White", "Cortado", "Ristretto", "Affogato",
                              "Irish Coffee", "Iced Coffee", "Cold Brew", "Frappuccino","Hot Chocolate", "Chai Latte", "Turkish Coffee", "Vienna Coffee", "Doppio", "Red Eye"};
     
+    
     CoffeeLine* head = nullptr;
     //Milestone 3: There is also a muffin booth:
     deque<string> muffinLine;
+    //Milstone 4: Frienship Bracelet Booth:
+    vector<string, string> FBLine; 
+
+
     
     for (int i = 0; i < INITIAL_CUST; i++){
         CoffeeLine* newCust = new CoffeeLine;
@@ -36,9 +42,12 @@ int main (){
 
         muffinLine.push_back((custNames[rand()%20]));
 
+        FBLine.push_back(custNames[rand()%20]);
+
         if(debug){
             cout << "new coffee customer: " << newCust->name << ", order: " << newCust->drink << endl;
             cout << "new muffin customer: " << muffinLine[i] << endl;
+            cout << "new FB customer: " << FBLine[i] << endl;
         }
     }
     if(debug){
@@ -58,6 +67,15 @@ int main (){
     for(int i = 0; i < muffinLine.size(); i++){
         cout << "Name: " << muffinLine[i] << endl;
     }
+    cout << endl;
+
+    cout << "Initial Friendship Bracelet Line:\n";
+    for(string cust : FBLine){
+        cout << "Name: " << cust << endl;
+
+    }
+    cout << endl;
+
     if(debug){
         cout << "end of line\n";
     }
@@ -105,6 +123,14 @@ int main (){
         cout << "No muffin customers\n";
     }
 
+    if(!FBLine.empty()){
+        cout << "Friendship Bracelet Booth Serving: " << FBLine.back() << endl;
+        FBLine.pop_back();
+    }
+    else{
+        cout << "No Friendship Bracelet customers\n";
+    }
+
         int chance = rand()%100;
         if(chance < CHANCE_JOIN){
              CoffeeLine* newCust = new CoffeeLine;
@@ -125,6 +151,13 @@ int main (){
 
         }
 
+        chance = rand()%100;
+        if(chance < CHANCE_JOIN){
+            string newMuffCust = custNames[rand()%20];
+            muffinLine.push_back(newMuffCust);
+            cout << "New Muffin Customer: " << newMuffCust << endl;
+
+        }
         current = head;
         cout << "\nCurrent Coffee Line:\n";
         while(current != nullptr){
