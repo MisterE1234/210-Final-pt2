@@ -2,6 +2,7 @@
 //IDE used : Visual Studio Code
 
 #include <iostream>
+#include <deque>
 
 using namespace std;
 
@@ -21,7 +22,10 @@ int main (){
                              "Jack", "Kathy", "Liam", "Mia", "Noah", "Olivia", "Paul", "Quinn", "Rachel", "Sam"};
     string custDrinks[20] = {"Latte", "Cappuccino", "Espresso", "Mocha", "Americano", "Macchiato", "Flat White", "Cortado", "Ristretto", "Affogato",
                              "Irish Coffee", "Iced Coffee", "Cold Brew", "Frappuccino","Hot Chocolate", "Chai Latte", "Turkish Coffee", "Vienna Coffee", "Doppio", "Red Eye"};
+    
     CoffeeLine* head = nullptr;
+    //Milestone 3: There is also a muffin booth:
+    deque<string> muffinLine;
     
     for (int i = 0; i < INITIAL_CUST; i++){
         CoffeeLine* newCust = new CoffeeLine;
@@ -30,8 +34,11 @@ int main (){
         newCust->next = head;
         head = newCust;
 
+        muffinLine.push_back((custNames[rand()%20]));
+
         if(debug){
-            cout << "new customer: " << newCust->name << ", order: " << newCust->drink << endl;
+            cout << "new coffee customer: " << newCust->name << ", order: " << newCust->drink << endl;
+            cout << "new muffin customer: " << muffinLine[i] << endl;
         }
     }
     if(debug){
@@ -46,6 +53,11 @@ int main (){
         current = current->next;
     }
     cout << endl;
+
+    queue<string> 
+    for(auto cust = muffinLine.back();){
+
+    }
     if(debug){
         cout << "end of line\n";
     }
