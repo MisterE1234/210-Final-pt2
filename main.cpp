@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool const debug = false; int const INITIAL_CUST = 3;
+bool const debug = false; int const INITIAL_CUST = 3, SIM_ROUNDS = 10, CHANCE_JOIN = 50;
 
 struct CoffeeLine{
     string name = "N/A";
@@ -48,6 +48,28 @@ int main (){
     cout << endl;
     if(debug){
         cout << "end of line\n";
+    }
+
+    //Milestone 2: start a simulation:
+    for (int i = 0; i < SIM_ROUNDS; i++){
+        cout << "ROUND " << i+1 << ":\n";
+
+        current = head;
+        while(current != nullptr){
+            if(current->next == nullptr){
+                cout << "Serving: " << current->name << ", order: " << current->drink << endl;
+                CoffeeLine* temp = head;
+                if(current == head){
+                    head = head->next;
+                    delete temp;
+                    
+                }
+                else{
+                    while(){}
+                }
+            }
+        }
+
     }
 
 
