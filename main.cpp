@@ -178,8 +178,8 @@ int main (){
 
         cout << "FRIENDSHIP BRACELET BOOTH:\n";
         if(!FBLine.empty()){
-            cout << "Friendship Bracelet Booth Serving: " << FBLine.back() << endl;
-            FBLine.pop_back();
+            cout << "Friendship Bracelet Booth Serving: " << FBLine.front() << endl;
+            FBLine.erase(FBLine.begin());
         }
         else{
             cout << "No Friendship Bracelet customers\n";
