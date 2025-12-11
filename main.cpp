@@ -47,13 +47,13 @@ int main (){
 
         FBLine.push_back(custNames[rand()%20]);
 
-        honeyLine.push_back(custNames[rand()%20]);
+        honeyLine.push_front(custNames[rand()%20]);
 
         if(debug){
             cout << "new coffee customer: " << newCust->name << ", order: " << newCust->drink << endl;
             cout << "new muffin customer: " << muffinLine[i] << endl;
             cout << "new FB customer: " << FBLine[i] << endl;
-            cout << "new honey customer: " << honeyLine.back() << endl;
+            cout << "new honey customer: " << honeyLine.front() << endl;
         }
     }
     if(debug){
@@ -96,6 +96,7 @@ int main (){
     for (int i = 0; i < SIM_ROUNDS; i++){
         cout << "ROUND " << i+1 << ":\n";
 
+        cout << "COFFEE BOOTH:\n";
         if(head != nullptr){
         current = head;
         while(current->next != nullptr){
@@ -122,41 +123,14 @@ int main (){
                 cout << "Served first in line\n";
             }
         }
-    }
-    else{ 
-        cout << "No coffee customers to serve.\n";
-    }
-
-    
-    if(!muffinLine.empty()){
-        cout << "Muffin Booth Serving: " << muffinLine.front() << endl;
-        muffinLine.pop_front();
-    }
-    else{
-        cout << "No muffin customers\n";
-    }
-
-
-    if(!FBLine.empty()){
-        cout << "Friendship Bracelet Booth Serving: " << FBLine.back() << endl;
-        FBLine.pop_back();
-    }
-    else{
-        cout << "No Friendship Bracelet customers\n";
-    }
-
-
-    if(!honeyLine.empty()){
-        cout << "Honey Booth Serving: " << honeyLine.back() << endl;
-        honeyLine.pop_back();
-    }
-    else{
-        cout << "No Honey customers\n";
-    }
+        }
+        else{ 
+            cout << "No coffee customers to serve.\n";
+        }
 
         int chance = rand()%100;
         if(chance < CHANCE_JOIN){
-             CoffeeLine* newCust = new CoffeeLine;
+            CoffeeLine* newCust = new CoffeeLine;
             newCust->name = custNames[rand()%20];
             newCust->drink = custDrinks[rand()%20];
             newCust->next = head;
@@ -164,6 +138,25 @@ int main (){
     
             cout << "New Coffee Customer: " << newCust->name << ", order: " << newCust->drink << endl;
             
+        }
+
+        current = head;
+        cout << "\nCurrent Coffee Line:\n";
+        while(current != nullptr){
+            cout << "Name: " << current->name << ", order: " << current->drink << endl;
+            current = current->next;
+        }
+        cout << endl;
+    
+
+
+        cout << "MUFFIN BOOTH:\n";
+        if(!muffinLine.empty()){
+            cout << "Muffin Booth Serving: " << muffinLine.front() << endl;
+            muffinLine.pop_front();
+        }
+        else{
+            cout << "No muffin customers\n";
         }
 
         chance = rand()%100;
@@ -174,6 +167,24 @@ int main (){
 
         }
 
+        cout << "Current Muffin Line:\n";
+        for(int i = 0; i < muffinLine.size(); i++){
+            cout << "Name: " << muffinLine[i] << endl;
+        }
+        cout << endl;
+
+
+
+
+        cout << "FRIENDSHIP BRACELET BOOTH:\n";
+        if(!FBLine.empty()){
+            cout << "Friendship Bracelet Booth Serving: " << FBLine.back() << endl;
+            FBLine.pop_back();
+        }
+        else{
+            cout << "No Friendship Bracelet customers\n";
+        }
+    
         chance = rand()%100;
         if(chance < CHANCE_JOIN){
             string newFBCust = custNames[rand()%20];
@@ -182,49 +193,38 @@ int main (){
 
         }
 
-        
+        cout << "Current Friendship Bracelet Line:\n";
+        for(string cust : FBLine){
+            cout << "Name: " << cust << endl;
+
+        }
+
+        cout << endl;
+
+
+
+        cout << "HONEY BOOTH:\n";
+        if(!honeyLine.empty()){
+            cout << "Honey Booth Serving: " << honeyLine.back() << endl;
+            honeyLine.pop_back();
+        }
+        else{
+            cout << "No Honey customers\n";
+        }
+
         chance = rand()%100;
-        if (chance < CHANCE_JOIN)
-        {
+        if (chance < CHANCE_JOIN){
             honeyLine.push_back(custNames[rand()%20]);
             cout << "New Honey Customer: " << honeyLine.back() << endl;
         }
 
-        
-
-
-
-
-
-        current = head;
-        cout << "\nCurrent Coffee Line:\n";
-        while(current != nullptr){
-            cout << "Name: " << current->name << ", order: " << current->drink << endl;
-            current = current->next;
-        }
-        cout << endl;
-
-        cout << "Current Muffin Line:\n";
-        for(int i = 0; i < muffinLine.size(); i++){
-            cout << "Name: " << muffinLine[i] << endl;
-        }
-        cout << endl;
-
-        cout << "Current Friendship Bracelet Line:\n";
-        for(string cust : FBLine){
-        cout << "Name: " << cust << endl;
-
-        }
-
         cout << "Current Honey Line:\n";
         for(string cust : honeyLine){
-        cout << "Name: " << cust << endl;
+            cout << "Name: " << cust << endl;
 
         }
-        
-
-
         cout << endl;
+
         if(debug){
             cout << "end of line\n";
         }
