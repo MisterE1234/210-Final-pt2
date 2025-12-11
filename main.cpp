@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool const debug = true; int const INITIAL_CUST = 3;
+bool const debug = false; int const INITIAL_CUST = 3;
 
 struct CoffeeLine{
     string name = "N/A";
@@ -15,6 +15,7 @@ struct CoffeeLine{
 };
 
 int main (){
+    //Milestone 1: set up a queue of customers at a coffee shop:
     srand(time(0));
     string custNames[20] = {"Ethan", "Alice", "Bob", "Cathy", "David", "Eva", "Frank", "Grace", "Hannah", "Ian",
                              "Jack", "Kathy", "Liam", "Mia", "Noah", "Olivia", "Paul", "Quinn", "Rachel", "Sam"};
@@ -27,20 +28,36 @@ int main (){
         newCust->name = custNames[rand()%20];
         newCust->drink = custDrinks[rand()%20];
         newCust->next = head;
+        head = newCust;
 
         if(debug){
             cout << "new customer: " << newCust->name << ", order: " << newCust->drink << endl;
         }
     }
-
-CoffeeLine* current = head;
-    
-    while(current != nullptr){
-
+    if(debug){
+        cout << "end of initial setup\n";
     }
 
-}
+    CoffeeLine* current = head;
 
+    cout << "\nCurrent Coffee Line:\n";
+    while(current != nullptr){
+        cout << "Name: " << current->name << ", order: " << current->drink << endl;
+        current = current->next;
+    }
+    cout << endl;
+    if(debug){
+        cout << "end of line\n";
+    }
+
+
+    while(head != nullptr){
+        CoffeeLine* temp = head;
+        head = head->next;
+        delete temp;
+    }
+    
+    cout << "Program ended\n";
 
     return 0;
 }
