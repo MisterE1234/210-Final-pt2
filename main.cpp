@@ -29,7 +29,7 @@ int main (){
     //Milestone 3: There is also a muffin booth:
     deque<string> muffinLine;
     //Milstone 4: Frienship Bracelet Booth:
-    vector<string, string> FBLine; 
+    vector<string> FBLine; 
 
 
     
@@ -153,22 +153,34 @@ int main (){
 
         chance = rand()%100;
         if(chance < CHANCE_JOIN){
-            string newMuffCust = custNames[rand()%20];
-            muffinLine.push_back(newMuffCust);
-            cout << "New Muffin Customer: " << newMuffCust << endl;
+            string newFBCust = custNames[rand()%20];
+            FBLine.push_back(newFBCust);
+            cout << "New FB Customer: " << newFBCust << endl;
 
         }
+
+
+
         current = head;
         cout << "\nCurrent Coffee Line:\n";
         while(current != nullptr){
             cout << "Name: " << current->name << ", order: " << current->drink << endl;
             current = current->next;
         }
+        cout << endl;
 
         cout << "Current Muffin Line:\n";
         for(int i = 0; i < muffinLine.size(); i++){
             cout << "Name: " << muffinLine[i] << endl;
         }
+        cout << endl;
+
+        cout << "Current Friendship Bracelet Line:\n";
+        for(string cust : FBLine){
+        cout << "Name: " << cust << endl;
+
+        }
+        
 
 
         cout << endl;
@@ -186,6 +198,8 @@ int main (){
     }
 
     muffinLine.clear();
+
+    FBLine.clear();
     
     cout << "Program ended\n";
 
