@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool const debug = false; int const INITIAL_CUST = 3, SIM_ROUNDS = 10, CHANCE_JOIN = 50;
+bool const debug = true; int const INITIAL_CUST = 3, SIM_ROUNDS = 10, CHANCE_JOIN = 50;
 
 struct CoffeeLine{
     string name = "N/A";
@@ -40,7 +40,7 @@ int main (){
 
     CoffeeLine* current = head;
 
-    cout << "\nCurrent Coffee Line:\n";
+    cout << "\nInitial Coffee Line:\n";
     while(current != nullptr){
         cout << "Name: " << current->name << ", order: " << current->drink << endl;
         current = current->next;
@@ -55,22 +55,54 @@ int main (){
         cout << "ROUND " << i+1 << ":\n";
 
         current = head;
-        while(current != nullptr){
-            if(current->next == nullptr){
-                cout << "Serving: " << current->name << ", order: " << current->drink << endl;
-                CoffeeLine* temp = head;
-                if(current == head){
-                    head = head->next;
-                    delete temp;
-                    
-                }
-                else{
-                    while(){}
-                }
+        while(current->next != nullptr){
+            current = current->next;
+            }
+
+        cout << "Serving: " << current->name << ", order: " << current->drink << endl;
+
+        CoffeeLine* temp = head;
+        if(current == head){
+            head = head->next;
+            delete temp;
+            if(debug){
+                cout << "Served final customer\n";
+            }
+        }
+        else{
+            while(temp->next != current){
+                temp = temp->next;
+            }
+            temp->next = nullptr;
+            delete current;
+            if(debug){
+                cout << "Served first in line\n";
+            }
+        }
+        int chance = rand()%100;
+        if(chance < CHANCE_JOIN){
+             CoffeeLine* newCust = new CoffeeLine;
+            newCust->name = custNames[rand()%20];
+            newCust->drink = custDrinks[rand()%20];
+            newCust->next = head;
+            head = newCust;
+
+            if(debug){
+                cout << "new customer: " << newCust->name << ", order: " << newCust->drink << endl;
             }
         }
 
+        cout << "\nCurrent Coffee Line:\n";
+        while(current != nullptr){
+            cout << "Name: " << current->name << ", order: " << current->drink << endl;
+            current = current->next;
+        }
+        cout << endl;
+        if(debug){
+            cout << "end of line\n";
+        }
     }
+
 
 
     while(head != nullptr){
