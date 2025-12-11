@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool const debug = true; int const INITIAL_CUST = 3, SIM_ROUNDS = 10, CHANCE_JOIN = 50;
+bool const debug = false; int const INITIAL_CUST = 3, SIM_ROUNDS = 10, CHANCE_JOIN = 50;
 
 struct CoffeeLine{
     string name = "N/A";
@@ -54,6 +54,7 @@ int main (){
     for (int i = 0; i < SIM_ROUNDS; i++){
         cout << "ROUND " << i+1 << ":\n";
 
+        if(head != nullptr){
         current = head;
         while(current->next != nullptr){
             current = current->next;
@@ -79,6 +80,10 @@ int main (){
                 cout << "Served first in line\n";
             }
         }
+    }
+    else{ 
+        cout << "No customers to serve.\n";
+    }
         int chance = rand()%100;
         if(chance < CHANCE_JOIN){
              CoffeeLine* newCust = new CoffeeLine;
@@ -86,12 +91,12 @@ int main (){
             newCust->drink = custDrinks[rand()%20];
             newCust->next = head;
             head = newCust;
-
-            if(debug){
-                cout << "new customer: " << newCust->name << ", order: " << newCust->drink << endl;
-            }
+    
+            cout << "New Customer: " << newCust->name << ", order: " << newCust->drink << endl;
+            
         }
 
+        current = head;
         cout << "\nCurrent Coffee Line:\n";
         while(current != nullptr){
             cout << "Name: " << current->name << ", order: " << current->drink << endl;
