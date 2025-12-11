@@ -4,6 +4,7 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -30,6 +31,8 @@ int main (){
     deque<string> muffinLine;
     //Milstone 4: Frienship Bracelet Booth:
     vector<string> FBLine; 
+    //Milestone 5: Honey Booth:
+    list <string> honeyLine;
 
 
     
@@ -44,10 +47,13 @@ int main (){
 
         FBLine.push_back(custNames[rand()%20]);
 
+        honeyLine.push_back(custNames[rand()%20]);
+
         if(debug){
             cout << "new coffee customer: " << newCust->name << ", order: " << newCust->drink << endl;
             cout << "new muffin customer: " << muffinLine[i] << endl;
             cout << "new FB customer: " << FBLine[i] << endl;
+            cout << "new honey customer: " << honeyLine.back() << endl;
         }
     }
     if(debug){
@@ -73,6 +79,12 @@ int main (){
     for(string cust : FBLine){
         cout << "Name: " << cust << endl;
 
+    }
+    cout << endl;
+
+    cout << "Initial Honey Line:\n";
+    for(string cust : honeyLine){
+        cout << "Name: " << cust << endl;
     }
     cout << endl;
 
@@ -114,6 +126,7 @@ int main (){
     else{ 
         cout << "No coffee customers to serve.\n";
     }
+
     
     if(!muffinLine.empty()){
         cout << "Muffin Booth Serving: " << muffinLine.front() << endl;
@@ -123,12 +136,22 @@ int main (){
         cout << "No muffin customers\n";
     }
 
+
     if(!FBLine.empty()){
         cout << "Friendship Bracelet Booth Serving: " << FBLine.back() << endl;
         FBLine.pop_back();
     }
     else{
         cout << "No Friendship Bracelet customers\n";
+    }
+
+
+    if(!honeyLine.empty()){
+        cout << "Honey Booth Serving: " << honeyLine.back() << endl;
+        honeyLine.pop_back();
+    }
+    else{
+        cout << "No Honey customers\n";
     }
 
         int chance = rand()%100;
@@ -159,6 +182,18 @@ int main (){
 
         }
 
+        
+        chance = rand()%100;
+        if (chance < CHANCE_JOIN)
+        {
+            honeyLine.push_back(custNames[rand()%20]);
+            cout << "New Honey Customer: " << honeyLine.back() << endl;
+        }
+
+        
+
+
+
 
 
         current = head;
@@ -177,6 +212,12 @@ int main (){
 
         cout << "Current Friendship Bracelet Line:\n";
         for(string cust : FBLine){
+        cout << "Name: " << cust << endl;
+
+        }
+
+        cout << "Current Honey Line:\n";
+        for(string cust : honeyLine){
         cout << "Name: " << cust << endl;
 
         }
@@ -201,6 +242,7 @@ int main (){
 
     FBLine.clear();
     
+    honeyLine.clear();
     cout << "Program ended\n";
 
     return 0;
