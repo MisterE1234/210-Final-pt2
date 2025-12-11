@@ -54,9 +54,9 @@ int main (){
     }
     cout << endl;
 
-    queue<string> 
-    for(auto cust = muffinLine.back();){
-
+    cout << "Initial Muffin Line:\n";
+    for(int i = 0; i < muffinLine.size(); i++){
+        cout << "Name: " << muffinLine[i] << endl;
     }
     if(debug){
         cout << "end of line\n";
@@ -72,7 +72,7 @@ int main (){
             current = current->next;
             }
 
-        cout << "Serving: " << current->name << ", order: " << current->drink << endl;
+        cout << "Coffee Booth Serving: " << current->name << ", order: " << current->drink << endl;
 
         CoffeeLine* temp = head;
         if(current == head){
@@ -94,8 +94,17 @@ int main (){
         }
     }
     else{ 
-        cout << "No customers to serve.\n";
+        cout << "No coffee customers to serve.\n";
     }
+    
+    if(!muffinLine.empty()){
+        cout << "Muffin Booth Serving: " << muffinLine.front() << endl;
+        muffinLine.pop_front();
+    }
+    else{
+        cout << "No muffin customers\n";
+    }
+
         int chance = rand()%100;
         if(chance < CHANCE_JOIN){
              CoffeeLine* newCust = new CoffeeLine;
@@ -104,8 +113,16 @@ int main (){
             newCust->next = head;
             head = newCust;
     
-            cout << "New Customer: " << newCust->name << ", order: " << newCust->drink << endl;
+            cout << "New Coffee Customer: " << newCust->name << ", order: " << newCust->drink << endl;
             
+        }
+
+        chance = rand()%100;
+        if(chance < CHANCE_JOIN){
+            string newMuffCust = custNames[rand()%20];
+            muffinLine.push_back(newMuffCust);
+            cout << "New Muffin Customer: " << newMuffCust << endl;
+
         }
 
         current = head;
@@ -114,6 +131,13 @@ int main (){
             cout << "Name: " << current->name << ", order: " << current->drink << endl;
             current = current->next;
         }
+
+        cout << "Current Muffin Line:\n";
+        for(int i = 0; i < muffinLine.size(); i++){
+            cout << "Name: " << muffinLine[i] << endl;
+        }
+
+
         cout << endl;
         if(debug){
             cout << "end of line\n";
@@ -127,6 +151,8 @@ int main (){
         head = head->next;
         delete temp;
     }
+
+    muffinLine.clear();
     
     cout << "Program ended\n";
 
